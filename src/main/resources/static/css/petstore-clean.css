@@ -1,0 +1,9 @@
+hr {
+    width: 100%;
+    color: green;
+}
+
+#error {
+    display: none;
+    color: orangered;
+}

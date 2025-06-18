@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Pet Store with Clean DDD</title>
+    <script th:src="@{/webjars/htmx.org/2.0.2/dist/htmx.min.js}"></script>
+    <script th:src="@{/js/petstore-clean.js}"></script>
+    <link th:href="@{/css/petstore-clean.css}" rel="stylesheet">
+</head>
+<body>
+<h1>Hello world</h1>
+
+<div id="error"></div>
+
+Variable foo: <span th:text="${foo}"/>
+<br/>
+<button th:hx-post="@{/page1(wam='baz')}" data-hx-swap="none">
+    Page 1
+</button>
+
+<button th:hx-post="@{/page2}" data-hx-swap="none">
+    Page 2
+</button>
+
+<button th:hx-post="@{/trigger-error}">
+    Error
+</button>
+
+<hr/>
+
+<div>
+    <div id="page">
+        page placeholder
+    </div>
+</div>
+
+</body>
+</html>
