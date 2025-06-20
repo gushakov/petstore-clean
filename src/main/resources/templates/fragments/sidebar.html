@@ -1,0 +1,55 @@
+<!--
+    Sidebar
+    Copyright: MIT, Mark Otto, Jacob Thornton, and Bootstrap contributors
+    Source: https://getbootstrap.com/docs/5.3/examples/
+-->
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="sidebar"
+     class="flex-shrink-0 p-3 bg-white" style="width: 250px;">
+    <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+        <span class="fs-5 fw-semibold mb-1">Pet Store</span>
+    </a>
+    <ul class="list-unstyled ps-0">
+        <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                    data-bs-target="#home-collapse" aria-expanded="true">
+                Home
+            </button>
+            <div class="collapse show" id="home-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a th:href="@{/}" class="link-dark rounded">Welcome</a></li>
+                    <li><a href="#" class="link-dark rounded"
+                           th:hx-post="@{/page1(wam='baz')}" data-hx-swap="none">Register a pet</a></li>
+                    <li><a href="#" class="link-dark rounded"
+                           th:hx-post="@{/page2}" data-hx-swap="none">Schedule appointment</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                    data-bs-target="#dashboard-collapse" aria-expanded="false">
+                More about us
+            </button>
+            <div class="collapse" id="dashboard-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="#" class="link-dark rounded">Veterinarians</a></li>
+                    <li><a href="#" class="link-dark rounded">Contacts</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="border-top my-3"></li>
+        <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                    data-bs-target="#account-collapse" aria-expanded="false">
+                Account
+            </button>
+            <div class="collapse" id="account-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="#" class="link-dark rounded">New...</a></li>
+                    <li><a href="#" class="link-dark rounded">Profile</a></li>
+                    <li><a href="#" class="link-dark rounded">Settings</a></li>
+                    <li><a href="#" class="link-dark rounded">Sign out</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>

@@ -1,37 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--
+COPYRIGHT DISCLAIMER
+====================
+Code in this and related files was copied and modified from
+Bootstrap examples by Mark Otto, Jacob Thornton, and Bootstrap contributors.
+The source code for Boostrap examples is available under MIT license from
+https://getbootstrap.com/docs/5.3/examples/.
+-->
+
 <head>
     <title>Pet Store with Clean DDD</title>
-    <script th:src="@{/webjars/htmx.org/2.0.2/dist/htmx.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+    <script th:src="@{/js/sidebars.js}"></script>
     <script th:src="@{/js/petstore-clean.js}"></script>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link th:href="@{/css/sidebars.css}" rel="stylesheet">
     <link th:href="@{/css/petstore-clean.css}" rel="stylesheet">
 </head>
 <body>
-<h1>Hello world</h1>
 
-<div id="error"></div>
+<main>
 
-Variable foo: <span th:text="${foo}"/>
-<br/>
-<button th:hx-post="@{/page1(wam='baz')}" data-hx-swap="none">
-    Page 1
-</button>
+    <div class="b-vertical-divider"></div>
+    <div th:insert="~{fragments/sidebar :: sidebar}"></div>
+    <div class="b-vertical-divider-sm"></div>
 
-<button th:hx-post="@{/page2}" data-hx-swap="none">
-    Page 2
-</button>
+    <div class="container">
 
-<button th:hx-post="@{/trigger-error}">
-    Error
-</button>
+        <div id="error"></div>
 
-<hr/>
+        <div th:insert="~{fragments/header :: header}"></div>
 
-<div>
-    <div id="page">
-        page placeholder
+        <button th:hx-post="@{/trigger-error}">
+            Error
+        </button>
+        <div id="page" class="col m-lg-3">
+            page placeholder
+        </div>
+
     </div>
-</div>
+
+</main>
 
 </body>
 </html>

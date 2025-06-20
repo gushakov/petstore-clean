@@ -1,1 +1,6 @@
-<span xmlns:th="http://www.thymeleaf.org" th:text="${errorMessage}"/>
+<div xmlns:th="http://www.thymeleaf.org"
+     class="alert alert-danger alert-dismissible fade show mt-3" role="alert"
+     data-hx-swap-oob="'innerHTML;#error'">
+    <strong>Error!</strong> <th:block th:text="${errorMessage}"/>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
