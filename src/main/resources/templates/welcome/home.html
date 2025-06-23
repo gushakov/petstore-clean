@@ -28,15 +28,12 @@ https://getbootstrap.com/docs/5.3/examples/.
     <div th:insert="~{fragments/sidebar :: sidebar}"></div>
     <div class="b-vertical-divider-sm"></div>
 
-    <div class="container">
+    <div class="container vh-100 overflow-auto">
 
         <div id="error"></div>
 
         <div th:insert="~{fragments/header :: header}"></div>
 
-        <button th:hx-post="@{/trigger-error}" data-hx-swap="none">
-            Error
-        </button>
         <div id="page" class="col m-lg-3">
             page placeholder
         </div>

@@ -1,0 +1,54 @@
+<div id="page" xmlns:th="http://www.thymeleaf.org" data-hx-swap-oob="true">
+    <div class="row">
+        <div class="col-sm-6">
+            <!--/*@thymesVar id="petRegistrationForm" type="com.github.petstoreclean.core.usecase.registerpet.PetRegistrationForm"*/-->
+            <form th:object="${petRegistrationForm}" th:hx-post="@{/pet/register-new-pet}">
+                <!-- Pet Information -->
+                <div class="mb-sm-1">
+                    <h5 class="text-muted">Pet Information</h5>
+                    <hr>
+                </div>
+
+                <div class="mb-sm-1">
+                    <label for="petName" class="form-label">Pet Name</label>
+                    <input type="text" class="form-control" id="petName" name="petName"
+                           th:value="*{petName}">
+                </div>
+
+                <div class="mb-sm-1">
+                    <label for="kindOfAnimal" class="form-label">Kind of Animal</label>
+                    <input type="text" class="form-control" id="kindOfAnimal" name="kindOfAnimal"
+                           th:value="*{kindOfAnimal}">
+                </div>
+
+                <div class="mb-sm-1">
+                    <label for="age" class="form-label">Age</label>
+                    <input type="number" class="form-control" id="age" name="age" th:value="*{age}" min="0">
+                </div>
+
+                <!-- Owner Information -->
+                <div class="mb-sm-1 mt-sm-1">
+                    <h5 class="text-muted">Owner Information</h5>
+                    <hr>
+                </div>
+
+                <div class="mb-sm-1">
+                    <label for="ownerFullName" class="form-label">Owner Full Name</label>
+                    <input type="text" class="form-control" id="ownerFullName" name="ownerFullName"
+                           th:value="*{ownerFullName}">
+                </div>
+
+                <div class="mb-sm-1">
+                    <label for="ownerAddress" class="form-label">Owner Address</label>
+                    <textarea class="form-control" id="ownerAddress" name="ownerAddress"
+                              th:value="*{ownerAddress}" rows="3"></textarea>
+                </div>
+
+                <div class="mt-sm-1">
+                    <button type="submit" class="btn btn-sm btn-primary">Register Pet</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

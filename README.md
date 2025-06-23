@@ -17,6 +17,7 @@ effectively on realistic example. Here are the tools I'll use mostly:
 - perplexity.io
 - ChatGPT
 - GitHub Copilot with Claude Sonnet 3.5 (Anthropic)
+- Claude AI
 
 I'm using Bootstrap in the UI. Here are sources, links and attributions for the code snippets which I'm using:
 

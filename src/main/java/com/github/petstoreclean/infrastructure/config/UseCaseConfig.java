@@ -1,5 +1,8 @@
 package com.github.petstoreclean.infrastructure.config;
 
+import com.github.petstoreclean.core.usecase.registerpet.RegisterPetInputPort;
+import com.github.petstoreclean.core.usecase.registerpet.RegisterPetPresenterOutputPort;
+import com.github.petstoreclean.core.usecase.registerpet.RegisterPetUseCase;
 import com.github.petstoreclean.core.usecase.welcome.WelcomeInputPort;
 import com.github.petstoreclean.core.usecase.welcome.WelcomeUseCase;
 import com.github.petstoreclean.infrastructure.adapter.web.welcome.WelcomePresenter;
@@ -15,6 +18,12 @@ public class UseCaseConfig {
     @Scope(BeanDefinition.SCOPE_PROTOTYPE)
     public WelcomeInputPort welcomeUseCase(WelcomePresenter presenter) {
         return new WelcomeUseCase(presenter);
+    }
+
+    @Bean
+    @Scope(BeanDefinition.SCOPE_PROTOTYPE)
+    public RegisterPetInputPort registerPetUseCase(RegisterPetPresenterOutputPort presenter) {
+        return new RegisterPetUseCase(presenter);
     }
 
 }

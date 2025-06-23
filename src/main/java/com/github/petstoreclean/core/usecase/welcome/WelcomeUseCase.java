@@ -15,18 +15,4 @@ public class WelcomeUseCase implements WelcomeInputPort {
         presenter.presentWelcomePage();
     }
 
-    @Override
-    public void showPage1() {
-        presenter.presentPage1();
-    }
-
-    @Override
-    public void showPage2() {
-        presenter.presentPage2();
-    }
-
-    @Override
-    public void showError() {
-        presenter.presentError(new IllegalStateException("Some error"));
-    }
 }

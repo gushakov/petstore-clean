@@ -1,3 +1,7 @@
 #error {
     display: none;
 }
+
+form .form-control {
+    width: 60%;
+}
