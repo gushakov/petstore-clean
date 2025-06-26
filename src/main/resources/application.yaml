@@ -3,9 +3,20 @@ spring:
     name: petstore-clean
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: "jdbc:postgresql://localhost:5432/petstore"
+    username: postgres
+    password: postgres
+    hikari:
+      connection-timeout: 5000
+  flyway:
+    schemas: public
 
 logging:
   level:
     root: info
-    web: debug
     com.github.petstoreclean: debug
+    org.springframework:
+      boot: debug
+      data: debug
