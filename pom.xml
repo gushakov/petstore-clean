@@ -21,6 +21,7 @@
         <bootstrap.version>5.3.5</bootstrap.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <mapstruct.lombok.binding.version>0.2.0</mapstruct.lombok.binding.version>
+        <jnanoid.version>2.0.0</jnanoid.version>
     </properties>
     <dependencies>
         <!--<dependency>
@@ -92,6 +93,13 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
+        </dependency>
+
+        <!-- Add this dependency to your pom.xml -->
+        <dependency>
+            <groupId>com.aventrix.jnanoid</groupId>
+            <artifactId>jnanoid</artifactId>
+            <version>${jnanoid.version}</version>
         </dependency>
 
         <dependency>
