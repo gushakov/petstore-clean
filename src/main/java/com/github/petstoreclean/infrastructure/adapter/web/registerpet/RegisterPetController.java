@@ -23,11 +23,6 @@ public class RegisterPetController extends AbstractWebController {
         useCase().adminInitiatesPetRegistration();
     }
 
-    @PostMapping(value = "/register-new-pet", consumes = "application/x-www-form-urlencoded;charset=UTF-8")
-    public void registerNewPet(PetRegistrationForm form) {
-        useCase().systemRegistersNewPet(form);
-    }
-
     @PostMapping(value = "/find-pet-owner", consumes = "application/x-www-form-urlencoded;charset=UTF-8")
     public void findPetOwner(@RequestParam("petOwnerNamePart") String petOwnerNamePart) {
         useCase().adminSearchesForPetOwners(petOwnerNamePart);
@@ -38,6 +33,11 @@ public class RegisterPetController extends AbstractWebController {
         Optional.ofNullable(selectedPetOwnerId)
                 .ifPresent(selectedPetOwner ->
                         useCase().adminSelectsPetOwnerAmongSearchResults(selectedPetOwnerId));
+    }
+
+    @PostMapping(value = "/register-new-pet", consumes = "application/x-www-form-urlencoded;charset=UTF-8")
+    public void registerNewPet(PetRegistrationForm form) {
+        useCase().systemRegistersNewPet(form);
     }
 
     private RegisterPetInputPort useCase() {
