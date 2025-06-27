@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12">
             <!--/*@thymesVar id="petRegistrationForm" type="com.github.petstoreclean.core.usecase.registerpet.PetRegistrationForm"*/-->
-            <form th:object="${petRegistrationForm}" th:hx-post="@{/pet/register-new-pet}" data-hx-swap="none">
+            <form th:object="${petRegistrationForm}" th:hx-post="@{/registerpet/register-new-pet}" data-hx-swap="none">
                 <div class="row">
                     <!-- Pet Information Column -->
                     <div class="col-md-6">
@@ -98,10 +98,10 @@
                                 <!-- Modal Footer -->
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary"
-                                            th:hx-post="@{/pet/find-pet-owner}" data-hx-swap="none">Search
+                                            th:hx-post="@{/registerpet/find-pet-owner}" data-hx-swap="none">Search
                                     </button>
                                     <button type="submit" class="btn btn-primary"
-                                            th:hx-post="@{/pet/select-pet-owner}" data-hx-swap="none">Select
+                                            th:hx-post="@{/registerpet/select-pet-owner}" data-hx-swap="none">Select
                                     </button>
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
                                     </button>

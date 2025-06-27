@@ -25,12 +25,12 @@ public class RegisterPetPresenter extends AbstractWebPresenter implements Regist
 
     @Override
     public void presentFormForNewPetRegistration(PetRegistrationForm form) {
-        presentSuccess("pet/new-pet-registration", Map.of("petRegistrationForm", form));
+        presentSuccess("registerpet/new-pet-registration", Map.of("petRegistrationForm", form));
     }
 
     @Override
     public void presentResultOfSearchForPetOwners(List<PetOwner> petOwners) {
-        presentSuccess("pet/matching-pet-owners",
+        presentSuccess("registerpet/matching-pet-owners",
                 Map.of("petOwners", petOwners.stream()
                         .map(uiMapper::convert)
                         .toList()));
@@ -38,11 +38,11 @@ public class RegisterPetPresenter extends AbstractWebPresenter implements Regist
 
     @Override
     public void presentPetOwnerSelectedForNewPetRegistration(PetOwner petOwner) {
-        presentSuccess("pet/pet-owner-info-update", Map.of("petOwner", uiMapper.convert(petOwner)));
+        presentSuccess("registerpet/pet-owner-info-update", Map.of("petOwner", uiMapper.convert(petOwner)));
     }
 
     @Override
     public void presentResultOfRegistrationOfNewPet() {
-        presentSuccess("pet/registration-success.html");
+        presentSuccess("registerpet/registration-success.html");
     }
 }

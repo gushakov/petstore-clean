@@ -15,7 +15,7 @@ import java.util.Optional;
 @Controller
 @ResponseBody
 @Slf4j
-@RequestMapping(value = "/pet", produces = "text/html;charset=UTF-8")
+@RequestMapping(value = "/registerpet", produces = "text/html;charset=UTF-8")
 public class RegisterPetController extends AbstractWebController {
 
     @PostMapping("/show-new-pet-registration-form")
