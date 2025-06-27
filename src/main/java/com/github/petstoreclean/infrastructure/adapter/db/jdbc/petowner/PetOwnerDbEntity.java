@@ -1,4 +1,3 @@
-
 package com.github.petstoreclean.infrastructure.adapter.db.jdbc.petowner;
 
 import lombok.Data;

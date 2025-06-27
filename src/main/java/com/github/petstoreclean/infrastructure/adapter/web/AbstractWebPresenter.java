@@ -12,6 +12,7 @@ import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 public class AbstractWebPresenter implements ErrorHandlingPresenterOutputPort {
@@ -45,10 +46,11 @@ public class AbstractWebPresenter implements ErrorHandlingPresenterOutputPort {
 
     @Override
     public void presentError(Exception e) {
+        log.error(e.getMessage(), e);
         try (PrintWriter writer = response.getWriter()) {
             setUpErrorResponse(HttpStatus.BAD_REQUEST);
             WebContext webContext = new WebContext(thymeleafApplication.buildExchange(request, response),
-                    Locale.ENGLISH, Map.of("errorMessage", e.getMessage()));
+                    Locale.ENGLISH, Map.of("errorMessage", Optional.ofNullable(e.getMessage()).orElse("Message is null")));
             templateEngine.process("error", webContext, writer);
             writer.flush();
         } catch (Exception error) {

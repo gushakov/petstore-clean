@@ -1,12 +1,13 @@
 package com.github.petstoreclean.infrastructure.adapter.db.map;
 
+import com.github.petstoreclean.core.model.ScalarMapper;
 import com.github.petstoreclean.core.model.petowner.PetOwner;
 import com.github.petstoreclean.infrastructure.adapter.db.jdbc.petowner.PetOwnerDbEntity;
 
 /**
  * Interface for mapping between domain models and database entities.
  */
-public interface DbMapper {
+public interface DbMapper extends ScalarMapper {
 
     /**
      * Converts database entity to domain model.

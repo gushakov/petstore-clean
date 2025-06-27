@@ -5,3 +5,7 @@
 form .form-control {
     width: 60%;
 }
+
+.modal-hide {
+    display: none;
+}

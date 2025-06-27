@@ -15,7 +15,7 @@ public interface IdsOperationsOutputPort {
      */
     String generateId(String prefix);
 
-    default String generatePetOwnerId(){
+    default String generatePetOwnerId() {
         return generateId(IdPrefixes.PET_OWNER);
     }
 }

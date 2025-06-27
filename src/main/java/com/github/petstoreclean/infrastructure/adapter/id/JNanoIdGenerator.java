@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class JNanoIdGenerator implements IdsOperationsOutputPort {
 
-    private static final char[] ALPHABET = 
-        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
-    
+    private static final char[] ALPHABET =
+            "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
+
     private static final int ID_LENGTH = 6;
 
     @Override

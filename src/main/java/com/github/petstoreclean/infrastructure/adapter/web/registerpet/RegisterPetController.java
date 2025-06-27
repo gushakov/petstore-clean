@@ -4,9 +4,13 @@ import com.github.petstoreclean.core.usecase.registerpet.PetRegistrationForm;
 import com.github.petstoreclean.core.usecase.registerpet.RegisterPetInputPort;
 import com.github.petstoreclean.infrastructure.adapter.web.AbstractWebController;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Optional;
 
 @Controller
 @ResponseBody
@@ -16,13 +20,24 @@ public class RegisterPetController extends AbstractWebController {
 
     @PostMapping("/show-new-pet-registration-form")
     public void showNewPetRegistrationForm() {
-        useCase().presentPetRegistrationForm();
+        useCase().adminInitiatesPetRegistration();
     }
 
-    @RequestMapping(value = "/register-new-pet", consumes = "application/x-www-form-urlencoded;charset=UTF-8")
+    @PostMapping(value = "/register-new-pet", consumes = "application/x-www-form-urlencoded;charset=UTF-8")
     public void registerNewPet(PetRegistrationForm form) {
-        log.debug("[Register new pet] Form: {}", form);
-        useCase().registerNewPet(form);
+        useCase().systemRegistersNewPet(form);
+    }
+
+    @PostMapping(value = "/find-pet-owner", consumes = "application/x-www-form-urlencoded;charset=UTF-8")
+    public void findPetOwner(@RequestParam("petOwnerNamePart") String petOwnerNamePart) {
+        useCase().adminSearchesForPetOwners(petOwnerNamePart);
+    }
+
+    @PostMapping("/select-pet-owner")
+    public void selectPetOwner(@RequestParam(value = "selectedPetOwnerId", required = false) String selectedPetOwnerId) {
+        Optional.ofNullable(selectedPetOwnerId)
+                .ifPresent(selectedPetOwner ->
+                        useCase().adminSelectsPetOwnerAmongSearchResults(selectedPetOwnerId));
     }
 
     private RegisterPetInputPort useCase() {

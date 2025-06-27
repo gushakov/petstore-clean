@@ -19,13 +19,15 @@
 
                         <div class="mb-3 field-row-2">
                             <label for="kindOfAnimal" class="form-label">Kind of Animal</label>
-                            <input type="text" class="form-control form-control-sm" id="kindOfAnimal" name="kindOfAnimal"
+                            <input type="text" class="form-control form-control-sm" id="kindOfAnimal"
+                                   name="kindOfAnimal"
                                    th:value="*{kindOfAnimal}">
                         </div>
 
                         <div class="mb-3 field-row-3">
                             <label for="age" class="form-label">Age</label>
-                            <input type="number" class="form-control form-control-sm" style="max-width: 100px;" id="age" name="age"
+                            <input type="number" class="form-control form-control-sm" style="max-width: 100px;" id="age"
+                                   name="age"
                                    th:value="*{age}" min="0">
                         </div>
                     </div>
@@ -41,9 +43,9 @@
                             <label for="ownerFullName" class="form-label">Owner Full Name</label>
                             <div class="input-group input-group-sm" style="max-width: 300px;">
                                 <input type="text" class="form-control" id="ownerFullName" name="ownerFullName"
-                                       th:value="*{ownerFullName}" disabled>
+                                       th:value="*{ownerFullName}" readonly>
                                 <button type="button" class="btn btn-outline-secondary" title="Search Owner"
-                                        data-bs-toggle="modal" data-bs-target="#myModal">
+                                        data-bs-toggle="modal" data-bs-target="#findPetOwnerModal">
                                     <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                                     </svg>
@@ -54,7 +56,7 @@
                         <div class="mb-3 field-row-2">
                             <label for="ownerAddress" class="form-label">Owner Address</label>
                             <textarea class="form-control form-control-sm" id="ownerAddress" name="ownerAddress"
-                                      th:text="*{ownerAddress}" rows="3" disabled></textarea>
+                                      th:value="*{ownerAddress}" rows="3" readonly></textarea>
                         </div>
                     </div>
                 </div>
@@ -69,23 +71,42 @@
                 </div>
 
                 <!-- The Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal fade" id="findPetOwnerModal" tabindex="-1" aria-labelledby="findPetOwnerModalLabel"
+                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="myModalLabel">Modal Heading</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <!-- Modal Body -->
-                            <div class="modal-body">
-                                Modal body content goes here.
-                            </div>
-                            <!-- Modal Footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
+                            <form>
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="findPetOwnerModalLabel">Find pet owner</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <!-- Modal Body -->
+                                <div class="modal-body">
+
+                                    <label for="petOwnerNamePart" class="form-label">Name</label>
+                                    <div class="row-cols-1">
+                                        <input type="text" id="petOwnerNamePart" class="form-control form-control-sm"
+                                               name="petOwnerNamePart">
+                                    </div>
+                                    <div id="matchingPetOwners" class="row-cols-1 mt-2">
+                                        <!-- empty table -->
+                                    </div>
+
+                                </div>
+                                <!-- Modal Footer -->
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary"
+                                            th:hx-post="@{/pet/find-pet-owner}" data-hx-swap="none">Search
+                                    </button>
+                                    <button type="submit" class="btn btn-primary"
+                                            th:hx-post="@{/pet/select-pet-owner}" data-hx-swap="none">Select
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

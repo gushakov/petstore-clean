@@ -7,7 +7,7 @@ import lombok.Value;
  */
 @Value
 public class PetId {
-    
+
     String id;
 
     public static PetId of(String id) {

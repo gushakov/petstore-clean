@@ -1,6 +1,7 @@
 package com.github.petstoreclean.infrastructure.adapter.db;
 
 import com.github.petstoreclean.core.model.petowner.PetOwner;
+import com.github.petstoreclean.core.model.petowner.PetOwnerId;
 import com.github.petstoreclean.core.port.persistence.PersistenceOperationError;
 import com.github.petstoreclean.core.port.persistence.PersistenceOperationsOutputPort;
 import com.github.petstoreclean.infrastructure.adapter.db.jdbc.petowner.PetOwnerDbEntityRepository;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@RequiredArgsConstructor
 public class PersistenceGateway implements PersistenceOperationsOutputPort {
 
     PetOwnerDbEntityRepository petOwnerDbRepo;
@@ -25,13 +26,23 @@ public class PersistenceGateway implements PersistenceOperationsOutputPort {
 
     @Transactional(readOnly = true)
     @Override
-    public List<PetOwner> obtainAllPetOwners() {
+    public List<PetOwner> obtainPetOwnersWithMatchingName(String namePart) {
         try {
             return StreamUtils.stream(petOwnerDbRepo.findAll())
                     .map(dbMapper::convert)
+                    .filter(petOwner -> petOwner.getName().toLowerCase().contains(namePart.toLowerCase()))
                     .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new PersistenceOperationError(e);
         }
-        catch (Exception e) {
+    }
+
+    @Override
+    public PetOwner obtainPetOwnerById(PetOwnerId petOwnerId) {
+        try {
+            return petOwnerDbRepo.findById(dbMapper.convertPetOwnerIdToString(petOwnerId))
+                    .map(dbMapper::convert).orElseThrow();
+        } catch (Exception e) {
             throw new PersistenceOperationError(e);
         }
     }

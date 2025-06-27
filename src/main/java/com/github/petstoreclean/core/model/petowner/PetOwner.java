@@ -7,7 +7,7 @@ import lombok.Value;
  */
 @Value
 public class PetOwner {
-    
+
     PetOwnerId petOwnerId;
     String name;
     String address;
