@@ -1,9 +1,11 @@
 package com.github.petstoreclean.core.port.id;
 
+import com.github.petstoreclean.core.model.id.IdPrefixes;
+
 /**
  * Output port for generating unique identifiers.
  */
-public interface IdGeneratorOutputPort {
+public interface IdsOperationsOutputPort {
 
     /**
      * Generates a new unique identifier with the specified prefix.
@@ -12,4 +14,8 @@ public interface IdGeneratorOutputPort {
      * @return unique identifier string in format "prefix_XXXXXX"
      */
     String generateId(String prefix);
+
+    default String generatePetOwnerId(){
+        return generateId(IdPrefixes.PET_OWNER);
+    }
 }

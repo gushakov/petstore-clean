@@ -9,7 +9,7 @@ public final class IdPrefixes {
         // Utility class
     }
 
-    public static final String PET_OWNER = "own";
+    public static final String PET_OWNER = "per";
     public static final String PET = "pet";
     // Add more prefixes as needed for other models
     // public static final String VETERINARIAN = "vet";

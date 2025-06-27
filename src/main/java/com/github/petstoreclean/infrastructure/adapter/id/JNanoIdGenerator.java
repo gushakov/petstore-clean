@@ -1,14 +1,14 @@
 package com.github.petstoreclean.infrastructure.adapter.id;
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
-import com.github.petstoreclean.core.port.id.IdGeneratorOutputPort;
+import com.github.petstoreclean.core.port.id.IdsOperationsOutputPort;
 import org.springframework.stereotype.Service;
 
 /**
  * Secondary adapter for generating unique identifiers using JNanoID.
  */
 @Service
-public class JNanoIdGenerator implements IdGeneratorOutputPort {
+public class JNanoIdGenerator implements IdsOperationsOutputPort {
 
     private static final char[] ALPHABET = 
         "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
