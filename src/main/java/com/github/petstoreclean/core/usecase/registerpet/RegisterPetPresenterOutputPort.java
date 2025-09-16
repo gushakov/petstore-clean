@@ -12,5 +12,7 @@ public interface RegisterPetPresenterOutputPort extends ErrorHandlingPresenterOu
 
     void presentPetOwnerSelectedForNewPetRegistration(PetOwner petOwner);
 
+    void presentFormForNewPetRegistrationWithErrors(PetRegistrationForm form, String errorMessage);
+
     void presentResultOfRegistrationOfNewPet();
 }

@@ -51,7 +51,17 @@ public class RegisterPetUseCase implements RegisterPetInputPort {
     @Override
     public void systemRegistersNewPet(PetRegistrationForm form) {
         try {
+
+            // Validate form data
+            try {
+                form.validate();
+            } catch (Exception e) {
+                presenter.presentFormForNewPetRegistrationWithErrors(form, "Form data is not valid");
+                return;
+            }
+
             log.debug("Will register pet: {}", form);
+            // TODO: Add actual pet registration logic here, e.g., create Pet and PetOwner entities, persist them.
             presenter.presentResultOfRegistrationOfNewPet();
         } catch (Exception e) {
             presenter.presentError(e);

@@ -1,5 +1,7 @@
 package com.github.petstoreclean.core.model.petowner;
 
+import com.github.petstoreclean.core.model.Validator;
+import lombok.Builder;
 import lombok.Value;
 
 /**
@@ -13,11 +15,13 @@ public class PetOwner {
     String address;
     Integer version;
 
-    public static PetOwner create(PetOwnerId petOwnerId, String name, String address) {
-        return new PetOwner(petOwnerId, name, address, null);
-    }
+    @Builder
+    public PetOwner(PetOwnerId petOwnerId, String name, String address, Integer version) {
+        this.petOwnerId = Validator.notNull(petOwnerId);
+        this.name = Validator.notBlank(name);
+        this.address = Validator.notBlank(address);
 
-    public PetOwner updateInfo(String name, String address) {
-        return new PetOwner(this.petOwnerId, name, address, this.version);
+        // could be null when creating a new pet owner
+        this.version = version;
     }
 }
