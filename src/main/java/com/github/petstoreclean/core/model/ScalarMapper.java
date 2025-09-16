@@ -1,5 +1,6 @@
 package com.github.petstoreclean.core.model;
 
+import com.github.petstoreclean.core.model.pet.PetId;
 import com.github.petstoreclean.core.model.petowner.PetOwnerId;
 
 public interface ScalarMapper {
@@ -20,5 +21,17 @@ public interface ScalarMapper {
         return petOwnerId.asString();
     }
 
+    default PetId convertStringToPetId(String id) {
+        if (id == null) {
+            return null;
+        }
+        return PetId.of(id);
+    }
 
+    default String convertPetIdToString(PetId petId) {
+        if (petId == null) {
+            return null;
+        }
+        return petId.asString();
+    }
 }

@@ -10,14 +10,14 @@ import lombok.Value;
 @Value
 public class PetOwner {
 
-    PetOwnerId petOwnerId;
+    PetOwnerId id;
     String name;
     String address;
     Integer version;
 
     @Builder
-    public PetOwner(PetOwnerId petOwnerId, String name, String address, Integer version) {
-        this.petOwnerId = Validator.notNull(petOwnerId);
+    public PetOwner(PetOwnerId id, String name, String address, Integer version) {
+        this.id = Validator.notNull(id);
         this.name = Validator.notBlank(name);
         this.address = Validator.notBlank(address);
 

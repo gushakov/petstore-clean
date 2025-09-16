@@ -13,7 +13,7 @@
                 <!--/*@thymesVar id="petOwners" type="java.util.List<com.github.petstoreclean.infrastructure.adapter.web.common.PetOwnerVmBean>"*/-->
                 <tr th:each="owner: ${petOwners}">
                     <td class="text-center">
-                        <input type="radio" name="selectedPetOwnerId" th:value="${owner.petOwnerId}"
+                        <input type="radio" name="selectedPetOwnerId" th:value="${owner.id}"
                                class="form-check-input">
                     </td>
                     <td th:text="${owner.name}"></td>

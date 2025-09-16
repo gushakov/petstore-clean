@@ -1,5 +1,6 @@
 package com.github.petstoreclean.core.model.pet;
 
+import lombok.Builder;
 import lombok.Value;
 
 /**
@@ -12,5 +13,14 @@ public class PetId {
 
     public static PetId of(String id) {
         return new PetId(id);
+    }
+
+    @Builder
+    private PetId(String id) {
+        this.id = id;
+    }
+
+    public String asString() {
+        return id;
     }
 }

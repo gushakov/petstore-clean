@@ -1,7 +1,9 @@
 package com.github.petstoreclean.infrastructure.adapter.db.map;
 
 import com.github.petstoreclean.core.model.ScalarMapper;
+import com.github.petstoreclean.core.model.pet.Pet;
 import com.github.petstoreclean.core.model.petowner.PetOwner;
+import com.github.petstoreclean.infrastructure.adapter.db.jdbc.pet.PetDbEntity;
 import com.github.petstoreclean.infrastructure.adapter.db.jdbc.petowner.PetOwnerDbEntity;
 
 /**
@@ -24,4 +26,8 @@ public interface DbMapper extends ScalarMapper {
      * @return database entity
      */
     PetOwnerDbEntity convert(PetOwner petOwner);
+
+    Pet convert(PetDbEntity dbEntity);
+
+    PetDbEntity convert(Pet pet);
 }

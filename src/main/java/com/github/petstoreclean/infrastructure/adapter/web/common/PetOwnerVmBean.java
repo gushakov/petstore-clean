@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class PetOwnerVmBean {
-    String petOwnerId;
+    String id;
     String name;
     String address;
 }

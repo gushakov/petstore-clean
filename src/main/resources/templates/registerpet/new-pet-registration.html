@@ -1,10 +1,5 @@
 <div id="page" xmlns:th="http://www.thymeleaf.org" data-hx-swap-oob="true">
     <div class="row">
-        <div class="col-6 alert alert-danger ms-3" th:if="${errorMessage}">
-            <p th:text="${errorMessage}"></p>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-12">
             <!--/*@thymesVar id="petRegistrationForm" type="com.github.petstoreclean.core.usecase.registerpet.PetRegistrationForm"*/-->
             <form th:object="${petRegistrationForm}" th:hx-post="@{/registerpet/register-new-pet}" data-hx-swap="none">
