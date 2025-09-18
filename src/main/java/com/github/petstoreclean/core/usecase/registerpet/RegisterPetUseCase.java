@@ -58,7 +58,7 @@ public class RegisterPetUseCase implements RegisterPetInputPort {
 
             // Validate form data
             try {
-                form.validate();
+                form.validatePetInfoAndOwnerId();
             } catch (Exception e) {
                 presenter.presentFormForNewPetRegistrationWithErrors("Form data is not valid");
                 return;

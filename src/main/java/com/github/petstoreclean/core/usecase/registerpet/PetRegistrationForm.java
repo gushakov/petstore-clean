@@ -1,5 +1,6 @@
 package com.github.petstoreclean.core.usecase.registerpet;
 
+import com.github.petstoreclean.core.model.InvalidDomainObjectError;
 import com.github.petstoreclean.core.model.Validator;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -18,14 +19,13 @@ public class PetRegistrationForm {
     String ownerFullName;
     String ownerAddress;
 
-    public void validate() {
+    public void validatePetInfoAndOwnerId() {
         Validator.notBlank(petName);
         Validator.notBlank(kindOfAnimal);
         Validator.notNull(age);
         if (age <= 0) {
-            throw new IllegalArgumentException("Pet age must be a positive number.");
+            throw new InvalidDomainObjectError(new IllegalArgumentException("Pet age must be a positive number."));
         }
-        Validator.notBlank(ownerFullName);
-        Validator.notBlank(ownerAddress);
+        Validator.notNull(petOwnerId);
     }
 }
