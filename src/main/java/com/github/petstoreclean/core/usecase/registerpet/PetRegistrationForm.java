@@ -1,7 +1,6 @@
 package com.github.petstoreclean.core.usecase.registerpet;
 
 import com.github.petstoreclean.core.model.Validator;
-import com.github.petstoreclean.core.model.petowner.PetOwnerId;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
