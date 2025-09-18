@@ -12,7 +12,7 @@ import lombok.Value;
 @Builder
 public class Pet {
 
-    PetId petId;
+    PetId id;
     String name;
     String kindOfAnimal;
     Integer age;
@@ -20,8 +20,8 @@ public class Pet {
     Integer version;
 
     @Builder
-    private Pet(PetId petId, String name, String kindOfAnimal, Integer age, PetOwnerId petOwnerId, Integer version) {
-        this.petId = Validator.notNull(petId);
+    private Pet(PetId id, String name, String kindOfAnimal, Integer age, PetOwnerId petOwnerId, Integer version) {
+        this.id = Validator.notNull(id);
         this.name = Validator.notBlank(name);
         this.kindOfAnimal = Validator.notBlank(kindOfAnimal);
         this.age = Validator.notNull(age);
