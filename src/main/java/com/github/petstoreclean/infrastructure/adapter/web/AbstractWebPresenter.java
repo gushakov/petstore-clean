@@ -47,16 +47,21 @@ public class AbstractWebPresenter implements ErrorHandlingPresenterOutputPort {
     @Override
     public void presentError(Exception e) {
         log.error(e.getMessage(), e);
+        presentError(e.getMessage());
+    }
+
+
+    @Override
+    public void presentError(String errorMessage) {
         try (PrintWriter writer = response.getWriter()) {
             setUpErrorResponse(HttpStatus.BAD_REQUEST);
             WebContext webContext = new WebContext(thymeleafApplication.buildExchange(request, response),
-                    Locale.ENGLISH, Map.of("errorMessage", Optional.ofNullable(e.getMessage()).orElse("Message is null")));
+                    Locale.ENGLISH, Map.of("errorMessage", Optional.ofNullable(errorMessage).orElse("Message is null")));
             templateEngine.process("error", webContext, writer);
             writer.flush();
         } catch (Exception error) {
             throw new RuntimeException(error);
         }
-
     }
 
     private void setUpResponseCommon() {
