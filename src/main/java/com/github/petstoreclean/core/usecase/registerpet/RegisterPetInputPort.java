@@ -21,7 +21,8 @@ public interface RegisterPetInputPort {
 
     /**
      * The admin selects a pet owner among matching pet owners returned
-     * by the search. The system updates
+     * by the search. The system updates the form with the selected pet's
+     * owner information (including the ID of the owner).
      *
      * @param petOwnerIdArg ID of the selected pet owner
      */

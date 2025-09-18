@@ -1,5 +1,6 @@
 package com.github.petstoreclean.core.usecase.registerpet;
 
+import com.github.petstoreclean.core.model.pet.Pet;
 import com.github.petstoreclean.core.model.petowner.PetOwner;
 import com.github.petstoreclean.infrastructure.adapter.web.ErrorHandlingPresenterOutputPort;
 
@@ -12,7 +13,7 @@ public interface RegisterPetPresenterOutputPort extends ErrorHandlingPresenterOu
 
     void presentPetOwnerSelectedForNewPetRegistration(PetOwner petOwner);
 
-    void presentFormForNewPetRegistrationWithErrors(PetRegistrationForm form, String errorMessage);
+    void presentFormForNewPetRegistrationWithErrors(String errorMessage);
 
-    void presentResultOfRegistrationOfNewPet();
+    void presentResultOfRegistrationOfNewPet(Pet pet, PetOwner petOwner);
 }

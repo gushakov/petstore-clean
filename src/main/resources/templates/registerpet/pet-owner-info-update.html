@@ -1,5 +1,6 @@
 <!--//js: closeFindPetOwnerModal//-->
 <!--/*@thymesVar id="petOwner" type="com.github.petstoreclean.infrastructure.adapter.web.common.PetOwnerVmBean"*/-->
+<input xmlns:th="http://www.thymeleaf.org" type="hidden" id="petOwnerId" name="petOwnerId" th:value="${petOwner.id}">
 <input xmlns:th="http://www.thymeleaf.org" data-hx-swap-oob="true"
        type="text" class="form-control" id="ownerFullName" name="ownerFullName"
        th:value="${petOwner.name}" readonly>

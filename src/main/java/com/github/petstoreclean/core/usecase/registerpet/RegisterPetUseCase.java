@@ -1,7 +1,10 @@
 package com.github.petstoreclean.core.usecase.registerpet;
 
+import com.github.petstoreclean.core.model.pet.Pet;
+import com.github.petstoreclean.core.model.pet.PetId;
 import com.github.petstoreclean.core.model.petowner.PetOwner;
 import com.github.petstoreclean.core.model.petowner.PetOwnerId;
+import com.github.petstoreclean.core.port.id.IdsOperationsOutputPort;
 import com.github.petstoreclean.core.port.persistence.PersistenceOperationsOutputPort;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +20,7 @@ public class RegisterPetUseCase implements RegisterPetInputPort {
 
     RegisterPetPresenterOutputPort presenter;
     PersistenceOperationsOutputPort persistenceOps;
+    IdsOperationsOutputPort idsOps;
 
     @Override
     public void adminInitiatesPetRegistration() {
@@ -56,13 +60,27 @@ public class RegisterPetUseCase implements RegisterPetInputPort {
             try {
                 form.validate();
             } catch (Exception e) {
-                presenter.presentFormForNewPetRegistrationWithErrors(form, "Form data is not valid");
+                presenter.presentFormForNewPetRegistrationWithErrors("Form data is not valid");
                 return;
             }
 
             log.debug("Will register pet: {}", form);
-            // TODO: Add actual pet registration logic here, e.g., create Pet and PetOwner entities, persist them.
-            presenter.presentResultOfRegistrationOfNewPet();
+
+            PetOwnerId petOwnerId = PetOwnerId.of(form.getPetOwnerId());
+            Pet newPet = Pet.builder()
+                    .id(PetId.of(idsOps.generatePetId()))
+                    .name(form.getPetName())
+                    .kindOfAnimal(form.getKindOfAnimal())
+                    .age(form.getAge())
+                    .petOwnerId(petOwnerId)
+                    .version(0)
+                    .build();
+            persistenceOps.savePet(newPet);
+
+            // load pet owner for presentation
+            PetOwner petOwner = persistenceOps.obtainPetOwnerById(petOwnerId);
+
+            presenter.presentResultOfRegistrationOfNewPet(newPet, petOwner);
         } catch (Exception e) {
             presenter.presentError(e);
         }

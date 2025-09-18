@@ -1,5 +1,6 @@
 package com.github.petstoreclean.infrastructure.adapter.web.registerpet;
 
+import com.github.petstoreclean.core.model.pet.Pet;
 import com.github.petstoreclean.core.model.petowner.PetOwner;
 import com.github.petstoreclean.core.usecase.registerpet.PetRegistrationForm;
 import com.github.petstoreclean.core.usecase.registerpet.RegisterPetPresenterOutputPort;
@@ -42,12 +43,12 @@ public class RegisterPetPresenter extends AbstractWebPresenter implements Regist
     }
 
     @Override
-    public void presentFormForNewPetRegistrationWithErrors(PetRegistrationForm form, String errorMessage) {
+    public void presentFormForNewPetRegistrationWithErrors(String errorMessage) {
         presentError(errorMessage);
     }
 
     @Override
-    public void presentResultOfRegistrationOfNewPet() {
-        presentSuccess("registerpet/registration-success.html");
+    public void presentResultOfRegistrationOfNewPet(Pet pet, PetOwner petOwner) {
+        presentSuccess("registerpet/registration-success", Map.of("pet", uiMapper.convert(pet), "petOwner", uiMapper.convert(petOwner)));
     }
 }

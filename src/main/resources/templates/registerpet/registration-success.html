@@ -1,7 +1,30 @@
-<div id="page" data-hx-swap-oob="true">
+<div id="page" xmlns:th="http://www.thymeleaf.org" data-hx-swap-oob="true">
     <div class="row">
-        <div class="col-6 alert alert-success ms-3">
+        <div class="col-12 alert alert-success ms-3">
             We have successfully registered your pet.
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Pet Details</div>
+                <div class="card-body">
+                    <!--/*@thymesVar id="pet" type="com.github.petstoreclean.infrastructure.adapter.web.common.PetVmBean"*/-->
+                    <p><strong>Name:</strong> <span th:text="${pet.name}"></span></p>
+                    <p><strong>Kind:</strong> <span th:text="${pet.kindOfAnimal}"></span></p>
+                    <p><strong>Age:</strong> <span th:text="${pet.age}"></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Owner Details</div>
+                <div class="card-body">
+                    <!--/*@thymesVar id="petOwner" type="com.github.petstoreclean.infrastructure.adapter.web.common.PetOwnerVmBean"*/-->
+                    <p><strong>Name:</strong> <span th:text="${petOwner.name}"></span></p>
+                    <p><strong>Address:</strong> <span th:text="${petOwner.address}"></span></p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

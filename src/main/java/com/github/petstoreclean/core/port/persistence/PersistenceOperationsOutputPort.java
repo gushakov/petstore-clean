@@ -1,5 +1,6 @@
 package com.github.petstoreclean.core.port.persistence;
 
+import com.github.petstoreclean.core.model.pet.Pet;
 import com.github.petstoreclean.core.model.petowner.PetOwner;
 import com.github.petstoreclean.core.model.petowner.PetOwnerId;
 
@@ -10,4 +11,6 @@ public interface PersistenceOperationsOutputPort {
     List<PetOwner> obtainPetOwnersWithMatchingName(String namePart);
 
     PetOwner obtainPetOwnerById(PetOwnerId petOwnerId);
+
+    void savePet(Pet pet);
 }

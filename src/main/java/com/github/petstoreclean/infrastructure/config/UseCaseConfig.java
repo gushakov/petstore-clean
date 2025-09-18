@@ -1,5 +1,6 @@
 package com.github.petstoreclean.infrastructure.config;
 
+import com.github.petstoreclean.core.port.id.IdsOperationsOutputPort;
 import com.github.petstoreclean.core.port.persistence.PersistenceOperationsOutputPort;
 import com.github.petstoreclean.core.usecase.registerpet.RegisterPetInputPort;
 import com.github.petstoreclean.core.usecase.registerpet.RegisterPetPresenterOutputPort;
@@ -24,8 +25,9 @@ public class UseCaseConfig {
     @Bean
     @Scope(BeanDefinition.SCOPE_PROTOTYPE)
     public RegisterPetInputPort registerPetUseCase(RegisterPetPresenterOutputPort presenter,
-                                                   PersistenceOperationsOutputPort persistenceOps) {
-        return new RegisterPetUseCase(presenter, persistenceOps);
+                                                   PersistenceOperationsOutputPort persistenceOps,
+                                                   IdsOperationsOutputPort idsOps) {
+        return new RegisterPetUseCase(presenter, persistenceOps, idsOps);
     }
 
 }
