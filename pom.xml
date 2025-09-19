@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.github</groupId>
     <artifactId>petstore-clean</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>petstore-clean</name>
     <description><![CDATA[Implementation of Pet Store example with Clean DDD architecture.]]></description>
     <properties>
