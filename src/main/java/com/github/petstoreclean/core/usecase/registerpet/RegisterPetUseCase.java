@@ -60,7 +60,7 @@ public class RegisterPetUseCase implements RegisterPetInputPort {
             try {
                 form.validatePetInfoAndOwnerId();
             } catch (Exception e) {
-                presenter.presentFormForNewPetRegistrationWithErrors("Form data is not valid");
+                presenter.presentValidationErrorForPetRegistrationForm("Form data is not valid");
                 return;
             }
 
@@ -73,7 +73,6 @@ public class RegisterPetUseCase implements RegisterPetInputPort {
                     .kindOfAnimal(form.getKindOfAnimal())
                     .age(form.getAge())
                     .petOwnerId(petOwnerId)
-                    .version(0)
                     .build();
             persistenceOps.savePet(newPet);
 

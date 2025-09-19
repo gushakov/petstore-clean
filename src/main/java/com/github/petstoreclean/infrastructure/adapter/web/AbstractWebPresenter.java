@@ -10,6 +10,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
@@ -26,17 +27,67 @@ public class AbstractWebPresenter implements ErrorHandlingPresenterOutputPort {
     @Autowired
     private HttpServletResponse response;
 
+    @Override
     public void presentSuccess(String template) {
-        presentSuccess(template, Map.of());
+        doProcessTemplates(null, template);
     }
 
+    @Override
     public void presentSuccess(String template, Map<String, Object> variables) {
+        doProcessTemplates(variables, template);
+    }
+
+    @Override
+    public void presentSuccessWithMessage(String template, String successMessage) {
+        doProcessTemplates(successVars(successMessage), "success", template);
+    }
+
+    @Override
+    public void presentSuccessWithMessage(String template, String successMessage, Map<String, Object> variables) {
+        Map<String, Object> allVariables = new HashMap<>(variables);
+        allVariables.putAll(successVars(successMessage));
+        doProcessTemplates(allVariables, "success", template);
+    }
+
+    @Override
+    public void presentSuccessMessage(String successMessage) {
+        doProcessTemplates(successVars(successMessage),
+                "success");
+    }
+
+    @Override
+    public void presentError(Exception e) {
+        log.error(e.getMessage(), e);
+        doProcessTemplates(null, "error");
+    }
+
+    @Override
+    public void presentErrorMessage(String errorMessage) {
+        doProcessTemplates(errorVars(errorMessage), "error");
+    }
+
+    /**
+     * Transforms provided templated HTML fragments and writes them to the HTTP response
+     * using provided variables.
+     *
+     * @param variables variables to be used in the templates, may be null
+     * @param templates Thymeleaf templates to be processed
+     */
+    protected void doProcessTemplates(Map<String, Object> variables, String... templates) {
+
+        if (templates.length == 0) {
+            throw new IllegalArgumentException("At least one template must be provided");
+        }
 
         try (PrintWriter writer = response.getWriter()) {
-            setUpOkResponse();
-            WebContext webContext = new WebContext(thymeleafApplication.buildExchange(request, response),
-                    Locale.ENGLISH, variables);
-            templateEngine.process(template, webContext, writer);
+            response.setContentType("text/html;charset=UTF-8");
+            response.setCharacterEncoding("UTF-8");
+            response.setStatus(HttpStatus.OK.value());
+            for (String template : templates) {
+                WebContext webContext = new WebContext(thymeleafApplication.buildExchange(request, response),
+                        Locale.ENGLISH, variables);
+                templateEngine.process(template, webContext, writer);
+            }
             writer.flush();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -44,39 +95,12 @@ public class AbstractWebPresenter implements ErrorHandlingPresenterOutputPort {
 
     }
 
-    @Override
-    public void presentError(Exception e) {
-        log.error(e.getMessage(), e);
-        presentError(e.getMessage());
+    private Map<String, Object> successVars(String successMessage) {
+        return Map.of("successMessage",
+                Optional.ofNullable(successMessage).orElse("Message is null"));
     }
 
-
-    @Override
-    public void presentError(String errorMessage) {
-        try (PrintWriter writer = response.getWriter()) {
-            setUpErrorResponse(HttpStatus.BAD_REQUEST);
-            WebContext webContext = new WebContext(thymeleafApplication.buildExchange(request, response),
-                    Locale.ENGLISH, Map.of("errorMessage", Optional.ofNullable(errorMessage).orElse("Message is null")));
-            templateEngine.process("error", webContext, writer);
-            writer.flush();
-        } catch (Exception error) {
-            throw new RuntimeException(error);
-        }
+    private Map<String, Object> errorVars(String errorMessage) {
+        return Map.of("errorMessage", Optional.ofNullable(errorMessage).orElse("Error message is null"));
     }
-
-    private void setUpResponseCommon() {
-        response.setContentType("text/html;charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
-    }
-
-    private void setUpOkResponse() {
-        setUpResponseCommon();
-        response.setStatus(HttpStatus.OK.value());
-    }
-
-    private void setUpErrorResponse(HttpStatus errorStatus) {
-        setUpResponseCommon();
-        response.setStatus(errorStatus.value());
-    }
-
 }

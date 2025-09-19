@@ -43,12 +43,14 @@ public class RegisterPetPresenter extends AbstractWebPresenter implements Regist
     }
 
     @Override
-    public void presentFormForNewPetRegistrationWithErrors(String errorMessage) {
-        presentError(errorMessage);
+    public void presentValidationErrorForPetRegistrationForm(String errorMessage) {
+        presentErrorMessage(errorMessage);
     }
 
     @Override
     public void presentResultOfRegistrationOfNewPet(Pet pet, PetOwner petOwner) {
-        presentSuccess("registerpet/registration-success", Map.of("pet", uiMapper.convert(pet), "petOwner", uiMapper.convert(petOwner)));
+        presentSuccessWithMessage("registerpet/registration-success",
+                "We have successfully registered your pet.",
+                Map.of("pet", uiMapper.convert(pet), "petOwner", uiMapper.convert(petOwner)));
     }
 }

@@ -1,7 +1,5 @@
 package com.github.petstoreclean.core.port.id;
 
-import com.github.petstoreclean.core.model.id.IdPrefixes;
-
 /**
  * Output port for generating unique identifiers.
  */

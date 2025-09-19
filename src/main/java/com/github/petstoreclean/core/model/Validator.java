@@ -16,4 +16,9 @@ public class Validator {
         return text;
     }
 
+    public static void notNegative(Integer number) {
+        if (number <= 0) {
+            throw new InvalidDomainObjectError();
+        }
+    }
 }
