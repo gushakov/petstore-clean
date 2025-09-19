@@ -6,24 +6,13 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.Map;
-
 @Component
 @Scope(WebApplicationContext.SCOPE_REQUEST)
 public class WelcomePresenter extends AbstractWebPresenter implements WelcomePresenterOutputPort {
 
     @Override
     public void presentWelcomePage() {
-        presentSuccess("welcome/home", Map.of("foo", "bar"));
+        presentSuccess("welcome/home");
     }
 
-    @Override
-    public void presentPage1() {
-        presentSuccess("page1/page");
-    }
-
-    @Override
-    public void presentPage2() {
-        presentSuccess("page2/page");
-    }
 }

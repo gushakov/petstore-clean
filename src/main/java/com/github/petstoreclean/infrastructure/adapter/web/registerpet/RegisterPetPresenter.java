@@ -5,10 +5,6 @@ import com.github.petstoreclean.core.model.petowner.PetOwner;
 import com.github.petstoreclean.core.usecase.registerpet.PetRegistrationForm;
 import com.github.petstoreclean.core.usecase.registerpet.RegisterPetPresenterOutputPort;
 import com.github.petstoreclean.infrastructure.adapter.web.AbstractWebPresenter;
-import com.github.petstoreclean.infrastructure.adapter.web.map.UiMapper;
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
@@ -18,11 +14,7 @@ import java.util.Map;
 
 @Component
 @Scope(WebApplicationContext.SCOPE_REQUEST)
-@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-@RequiredArgsConstructor
 public class RegisterPetPresenter extends AbstractWebPresenter implements RegisterPetPresenterOutputPort {
-
-    UiMapper uiMapper;
 
     @Override
     public void presentFormForNewPetRegistration(PetRegistrationForm form) {

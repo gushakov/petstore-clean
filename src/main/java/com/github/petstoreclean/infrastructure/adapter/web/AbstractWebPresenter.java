@@ -1,5 +1,6 @@
 package com.github.petstoreclean.infrastructure.adapter.web;
 
+import com.github.petstoreclean.infrastructure.adapter.web.map.UiMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,9 @@ public class AbstractWebPresenter implements ErrorHandlingPresenterOutputPort {
     private HttpServletRequest request;
     @Autowired
     private HttpServletResponse response;
+
+    @Autowired
+    protected UiMapper uiMapper;
 
     @Override
     public void presentSuccess(String template) {
@@ -79,13 +83,14 @@ public class AbstractWebPresenter implements ErrorHandlingPresenterOutputPort {
             throw new IllegalArgumentException("At least one template must be provided");
         }
 
+        WebContext webContext = new WebContext(thymeleafApplication.buildExchange(request, response),
+                Locale.ENGLISH, variables);
+
         try (PrintWriter writer = response.getWriter()) {
             response.setContentType("text/html;charset=UTF-8");
             response.setCharacterEncoding("UTF-8");
             response.setStatus(HttpStatus.OK.value());
             for (String template : templates) {
-                WebContext webContext = new WebContext(thymeleafApplication.buildExchange(request, response),
-                        Locale.ENGLISH, variables);
                 templateEngine.process(template, webContext, writer);
             }
             writer.flush();

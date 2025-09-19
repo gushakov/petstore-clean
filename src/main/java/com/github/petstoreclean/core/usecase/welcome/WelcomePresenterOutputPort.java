@@ -6,7 +6,4 @@ public interface WelcomePresenterOutputPort extends ErrorHandlingPresenterOutput
 
     void presentWelcomePage();
 
-    void presentPage1();
-
-    void presentPage2();
 }

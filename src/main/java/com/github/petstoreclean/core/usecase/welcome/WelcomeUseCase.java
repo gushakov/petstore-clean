@@ -12,7 +12,11 @@ public class WelcomeUseCase implements WelcomeInputPort {
 
     @Override
     public void visitWelcomePage() {
-        presenter.presentWelcomePage();
+        try {
+            presenter.presentWelcomePage();
+        } catch (Exception e) {
+            presenter.presentError(e);
+        }
     }
 
 }
