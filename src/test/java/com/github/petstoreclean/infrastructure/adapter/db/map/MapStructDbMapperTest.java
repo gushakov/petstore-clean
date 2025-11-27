@@ -22,9 +22,9 @@ class MapStructDbMapperTest {
                 .id(petId)
                 .name("Fido")
                 .kindOfAnimal("Dog")
-                .age(5)
+                .age(Integer.valueOf(5))
                 .petOwnerId(petOwnerId)
-                .version(1)
+                .version(Integer.valueOf(1))
                 .build();
 
         // When

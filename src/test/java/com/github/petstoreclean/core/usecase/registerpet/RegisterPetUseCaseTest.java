@@ -45,7 +45,8 @@ class RegisterPetUseCaseTest {
 
     @Test
     void adminSearchesForPetOwners_shouldPresentSearchResults() {
-        List<PetOwner> petOwners = Collections.singletonList(PetOwner.builder().id(PetOwnerId.of("PO_1")).name("John Doe").address("123 Main St").version(0).build());
+        List<PetOwner> petOwners = Collections.singletonList(PetOwner.builder().id(PetOwnerId.of("PO_1"))
+                .name("John Doe").address("123 Main St").version(Integer.valueOf(0)).build());
         when(persistenceOps.obtainPetOwnersWithMatchingName("John")).thenReturn(petOwners);
 
         useCase.adminSearchesForPetOwners("John");
@@ -56,7 +57,8 @@ class RegisterPetUseCaseTest {
 
     @Test
     void adminSelectsPetOwnerAmongSearchResults_shouldPresentSelectedPetOwner() {
-        PetOwner petOwner = PetOwner.builder().id(PetOwnerId.of("PO_1")).name("John Doe").address("123 Main St").version(0).build();
+        PetOwner petOwner = PetOwner.builder().id(PetOwnerId.of("PO_1")).name("John Doe").address("123 Main St")
+                .version(Integer.valueOf(0)).build();
         when(persistenceOps.obtainPetOwnerById(PetOwnerId.of("PO_1"))).thenReturn(petOwner);
 
         useCase.adminSelectsPetOwnerAmongSearchResults("PO_1");
@@ -71,13 +73,14 @@ class RegisterPetUseCaseTest {
         PetRegistrationForm form = PetRegistrationForm.builder()
                 .petName("Whiskers")
                 .kindOfAnimal("Cat")
-                .age(2)
+                .age(Integer.valueOf(2))
                 .petOwnerId(existingPetOwnerId)
                 .build();
 
         when(idsOps.generatePetId()).thenReturn("PET_NEW_2");
         // We need to mock the petOwner retrieval for the presenter call
-        PetOwner existingPetOwner = PetOwner.builder().id(PetOwnerId.of(existingPetOwnerId)).name("Existing Owner").address("789 Pine St").version(0).build();
+        PetOwner existingPetOwner = PetOwner.builder().id(PetOwnerId.of(existingPetOwnerId)).name("Existing Owner")
+                .address("789 Pine St").version(Integer.valueOf(0)).build();
         when(persistenceOps.obtainPetOwnerById(PetOwnerId.of(existingPetOwnerId))).thenReturn(existingPetOwner);
 
         useCase.systemRegistersNewPet(form);

@@ -26,7 +26,7 @@ class PetDbEntityRepositoryTest {
         newPet.setId("pet_123456");
         newPet.setName("Fido");
         newPet.setKindOfAnimal("Dog");
-        newPet.setAge(3);
+        newPet.setAge(Integer.valueOf(3));
         newPet.setPetOwnerId("per_a7x2m9"); // Existing owner from Flyway
 
         // When
